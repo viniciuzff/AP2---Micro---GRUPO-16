@@ -1,0 +1,38 @@
+services:
+  management:
+    build: ./management
+    container_name: management
+    ports:
+      - "5000:5000"
+    networks:
+      - micros_net
+
+  reservas:
+    build: ./reservas
+    container_name: reservas
+    ports:
+      - "5001:5001"
+    environment:
+      - DOCKER_ENV=true
+      - MANAGEMENT_URL=http://management:5000
+    depends_on:
+      - management
+    networks:
+      - micros_net
+
+  atividades:
+    build: ./atividades
+    container_name: atividades
+    ports:
+      - "5002:5002"
+    environment:
+      - DOCKER_ENV=true
+      - MANAGEMENT_URL=http://management:5000
+    depends_on:
+      - management
+    networks:
+      - micros_net
+
+networks:
+  micros_net:
+    driver: bridge
