@@ -34,7 +34,7 @@ def criar_reserva():
             sala:
               type: integer
             lab:
-              type: boolean
+              type: string
             turma_id:
               type: integer
     responses:
@@ -58,7 +58,7 @@ def criar_reserva():
     reserva = Reserva(
         data=data["data"],
         num_sala=int(data["sala"]),
-        lab=bool(data.get("lab", False)),
+        lab=str(data.get("lab", False)),
         turma_id=turma_id
     )
 
@@ -102,7 +102,7 @@ def atualizar_reserva(id):
             sala:
               type: integer
             lab:
-              type: boolean
+              type: string
             turma_id:
               type: integer
     responses:
@@ -117,7 +117,7 @@ def atualizar_reserva(id):
     if "sala" in data:
         reserva.num_sala = int(data["sala"])
     if "lab" in data:
-        reserva.lab = bool(data["lab"])
+        reserva.lab = str(data["lab"])
     if "turma_id" in data:
         turma_id = data["turma_id"]
         try:
